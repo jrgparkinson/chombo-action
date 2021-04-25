@@ -5,10 +5,10 @@ inputs:
     description: 'Path to chombo root'
     required: false
     default: '/home/runner/chombo'
-  dim: 
-    description: 'Num dimensions'
+  compile-opts: 
+    description: 'Compile options'
     required: false
-    default: '2'
+    default: 'DIM=2'
 runs:
   using: "composite"
   steps:
@@ -84,8 +84,7 @@ runs:
     - name: Compile Chombo
       shell: bash
       run: |
-        ls ${{ github.action_path }}
         cp ${{ github.action_path }}/Make.defs.local \
           $CHOMBO_HOME/mk/Make.defs.local
         cd $CHOMBO_HOME
-        make lib DIM=${{ inputs.chombo_root }}
+        make lib
