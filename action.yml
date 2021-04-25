@@ -15,6 +15,7 @@ runs:
     - name: Setup environmental variables
       shell: bash
       run: |
+        echo "CHOMBO_ROOT=${{ inputs.chombo_root }}" >> $GITHUB_ENV
         echo "CHOMBO_HOME=${{ inputs.chombo_root }}/lib" >> $GITHUB_ENV
         echo "HDF5_PATH=$(echo $HOME)/hdf5-dir" >> $GITHUB_ENV
         echo "LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH):$(echo $HDF5_PATH)/lib" >> $GITHUB_ENV
@@ -25,6 +26,8 @@ runs:
         echo $HOME
         echo $LD_LIBRARY_PATH
         echo $GITHUB_WORKSPACE
+        ls
+        ls $GITHUB_WORKSPACE
     - name: Update package list
       shell: bash
       run: sudo apt-get update
