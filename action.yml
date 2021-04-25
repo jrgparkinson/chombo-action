@@ -5,7 +5,7 @@ inputs:
     description: 'Path to chombo root'
     required: false
     default: '/home/runner/chombo'
-  compile-opts: 
+  compile_opts: 
     description: 'Compile options'
     required: false
     default: 'DIM=2'
@@ -87,4 +87,4 @@ runs:
         cp ${{ github.action_path }}/Make.defs.local \
           $CHOMBO_HOME/mk/Make.defs.local
         cd $CHOMBO_HOME
-        make lib
+        make lib ${{ inputs.compile_opts }}
