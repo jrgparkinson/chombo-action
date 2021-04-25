@@ -28,6 +28,7 @@ runs:
         echo $GITHUB_WORKSPACE
         ls
         ls $GITHUB_WORKSPACE
+        cp ${{ github.action_path }}/Make.defs.local X.local
     - name: Update package list
       shell: bash
       run: sudo apt-get update
@@ -83,9 +84,8 @@ runs:
     - name: Compile Chombo
       shell: bash
       run: |
-        ls
-        ls $GITHUB_WORKSPACE
-        cp $GITHUB_WORKSPACE/Make.defs.local \
+        ls ${{ github.action_path }}
+        cp ${{ github.action_path }}/Make.defs.local \
           $CHOMBO_HOME/mk/Make.defs.local
         cd $CHOMBO_HOME
         make lib DIM=${{ inputs.chombo_root }}
