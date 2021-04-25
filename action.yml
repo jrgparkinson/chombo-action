@@ -19,16 +19,7 @@ runs:
         echo "CHOMBO_HOME=${{ inputs.chombo_root }}/lib" >> $GITHUB_ENV
         echo "HDF5_PATH=$(echo $HOME)/hdf5-dir" >> $GITHUB_ENV
         echo "LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH):$(echo $HDF5_PATH)/lib" >> $GITHUB_ENV
-    - name: Verify
-      shell: bash
-      run: |
-        echo $CHOMBO_HOME
-        echo $HOME
-        echo $LD_LIBRARY_PATH
-        echo $GITHUB_WORKSPACE
-        ls
-        ls $GITHUB_WORKSPACE
-        cp ${{ github.action_path }}/Make.defs.local X.local
+
     - name: Update package list
       shell: bash
       run: sudo apt-get update
@@ -62,25 +53,16 @@ runs:
       run: |
         wget 'https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-1.8.21/src/hdf5-1.8.21.tar.gz'
         tar -zxvf hdf5-1.8.21.tar.gz
-        ls
         cd hdf5-1.8.21
         ./configure --prefix=$HDF5_PATH
         make
         make install
    
-
     - name: Download Chombo
       shell: bash
       run: |
-        git clone https://github.com/applied-numerical-algorithms-group-lbnl/Chombo_3.2.git  $CHOMBO_ROOT
-    - name: Verify
-      shell: bash
-      run: |
-        echo "$HDF5_PATH:"
-        ls $HDF5_PATH
-        echo "---------------------------"
-        echo "$CHOMBO_HOME"
-        ls $CHOMBO_HOME
+        git clone https://github.com/applied-numerical-algorithms-group-lbnl/Chombo_3.2.git $CHOMBO_ROOT
+
     - name: Compile Chombo
       shell: bash
       run: |
