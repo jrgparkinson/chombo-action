@@ -124,7 +124,7 @@ MPI           = FALSE
 USE_HDF       = TRUE
 
 HDFINCFLAGS= -I$(HDF5_PATH)/include
-HDFLIBFLAGS= -L$(HDF5_PATH) -lhdf5 -lz 
+HDFLIBFLAGS= -L$(HDF5_PATH)/lib -lhdf5 -lz 
 
 #USE_MF        =
 #USE_MT        =
