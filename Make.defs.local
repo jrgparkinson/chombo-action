@@ -123,8 +123,8 @@ MPI           = FALSE
 #USE_CCSE      =
 USE_HDF       = TRUE
 
-HDFINCFLAGS= -I/home/runner/hdf5-dir/include
-HDFLIBFLAGS= -L/home/runner/hdf5-dir/lib -lhdf5 -lz 
+HDFINCFLAGS= -I$(HDF5_PATH)/include
+HDFLIBFLAGS= -L$(HDF5_PATH) -lhdf5 -lz 
 
 #USE_MF        =
 #USE_MT        =
