@@ -10,9 +10,9 @@ inputs:
     required: false
     default: 'DIM=2'
   chombo_tag:
-    description: 'Tag to checkout from the chombo repo'
+    description: 'Tag or branch to checkout from the chombo repo'
     required: false
-    default: ''
+    default: 'master'
 runs:
   using: "composite"
   steps:
@@ -65,13 +65,7 @@ runs:
     - name: Download Chombo
       shell: bash
       run: |
-        git clone https://github.com/applied-numerical-algorithms-group-lbnl/Chombo_3.2.git $CHOMBO_ROOT
-
-    - name: Checkout chombo tag
-      if: "${{ inputs.chombo_tag != '' }}"
-      shell: bash
-      run: |
-        git checkout ${{ inputs.chombo_tag }}
+        git clone https://github.com/applied-numerical-algorithms-group-lbnl/Chombo_3.2.git $CHOMBO_ROOT --branch ${{ inputs.chombo_tag }} --single-branch
 
     - name: Compile Chombo
       shell: bash
