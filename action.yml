@@ -9,6 +9,10 @@ inputs:
     description: 'Compile options'
     required: false
     default: 'DIM=2'
+  chombo_tag:
+    description: 'Tag to checkout from the chombo repo'
+    required: false
+    default: ''
 runs:
   using: "composite"
   steps:
@@ -62,6 +66,12 @@ runs:
       shell: bash
       run: |
         git clone https://github.com/applied-numerical-algorithms-group-lbnl/Chombo_3.2.git $CHOMBO_ROOT
+
+    - name: Checkout chombo tag
+      if: "${{ github.event.inputs.chombo_tag != '' }}"
+      shell: bash
+      run: |
+        git checkout ${{ inputs.chombo_tag }}
 
     - name: Compile Chombo
       shell: bash
